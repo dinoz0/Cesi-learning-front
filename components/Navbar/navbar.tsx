@@ -13,8 +13,9 @@ function Navbar() {
   return (
     <div className={styles.nav}>
       <div className={styles.navigate}>
-        {/* <Link href={"/"}></Link> */}
-        <Image src="/logo-cesi.png" alt="logo-cesi" width={167} height={76} />
+        <Link href={"/"}>
+          <Image src="/logo-cesi.png" alt="logo-cesi" width={167} height={76} />
+        </Link>
       </div>
       <Client />
     </div>

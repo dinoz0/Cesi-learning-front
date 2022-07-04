@@ -18,4 +18,5 @@
 .navigate * {
     display: inline;
     margin: 10px;
+    cursor: pointer;
 }
