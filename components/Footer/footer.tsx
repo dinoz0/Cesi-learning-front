@@ -8,13 +8,21 @@ function Footer() {
   return (
     <footer className={styles.footer}>
       <span className={styles.logo} style={{ cursor: "pointer" }}>
-        <Image
-          src="/favicon.ico"
-          alt="Les2 Logo"
-          width={32}
-          height={32}
-          onClick={scrollTop}
-        />
+        <a
+          href="https://www.cesi.fr/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Powered by{" "}
+          <span className={styles.logo}>
+            <Image
+              src="/logo-cesi.png"
+              alt="Logo Cesi Petit"
+              width={72}
+              height={16}
+            />
+          </span>
+        </a>
       </span>
     </footer>
   );
