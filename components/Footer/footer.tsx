@@ -1,5 +1,6 @@
 import Image from "next/image";
-import styles from "../../styles/Home.module.css";
+import Link from "next/link";
+import styles from "./footer.module.css";
 
 function Footer() {
   const scrollTop = () => {
@@ -7,7 +8,7 @@ function Footer() {
   };
   return (
     <footer className={styles.footer}>
-      <span className={styles.logo} style={{ cursor: "pointer" }}>
+      <span className={styles.logo}>
         <Image
           src="/favicon.ico"
           alt="Les2 Logo"
@@ -16,6 +17,13 @@ function Footer() {
           onClick={scrollTop}
         />
       </span>
+      <Link
+          href="/about"
+        >
+          <span className={styles.about}>
+            A propos
+          </span>
+        </Link>
     </footer>
   );
 }
