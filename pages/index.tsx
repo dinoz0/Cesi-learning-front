@@ -3,8 +3,9 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+import ListeCours from "../components/ListeCours/listeCours";
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -19,42 +20,36 @@ const Home: NextPage = () => {
         </h1>
 
         <div className={styles.grid}>
-          <a className={styles.card}>
-            <h2>
-              <Link href={"/cours"}>Cours de React</Link>
-            </h2>
-            <p>Cours de React facile.</p>
-          </a>
-          <a className={styles.card}>
-            <h2>
-              <Link href={"/cours"}>Cours de React</Link>
-            </h2>
-            <p>Cours de React moyen.</p>
-          </a>
-          <a className={styles.card}>
-            <h2>
-              <Link href={"/cours"}>Cours de React</Link>
-            </h2>
-            <p>Cours de React difficile.</p>
-          </a>
-          <a className={styles.card}>
-            <h2>
-              <Link href={"/cours"}>Cours de React</Link>
-            </h2>
-            <p>Cours de React facile.</p>
-          </a>
-          <a className={styles.card}>
-            <h2>
-              <Link href={"/cours"}>Cours de React</Link>
-            </h2>
-            <p>Cours de React moyen.</p>
-          </a>
-          <a className={styles.card}>
-            <h2>
-              <Link href={"/cours"}>Cours de React</Link>
-            </h2>
-            <p>Cours de React difficile.</p>
-          </a>
+          <ListeCours
+            id="1"
+            name="Cours de React"
+            description="Cours sur les base de React"
+          />
+          <ListeCours
+            id="2"
+            name="Cours de React"
+            description="Cours sur les base de React"
+          />
+          <ListeCours
+            id="3"
+            name="Cours de Angular"
+            description="Cours sur les base de Angular"
+          />
+          <ListeCours
+            id="4"
+            name="Cours de React"
+            description="Cours sur les base de React"
+          />
+          <ListeCours
+            id="5"
+            name="Cours de React"
+            description="Cours sur les base de React"
+          />
+          <ListeCours
+            id="6"
+            name="Cours de React"
+            description="Cours sur les base de React"
+          />
         </div>
       </main>
 
