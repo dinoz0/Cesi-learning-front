@@ -1,5 +1,6 @@
 import Image from "next/image";
-import styles from "../../styles/Home.module.css";
+import Link from "next/link";
+import styles from "./footer.module.css";
 
 function Footer() {
   const scrollTop = () => {
@@ -24,6 +25,13 @@ function Footer() {
           </span>
         </a>
       </span>
+      <Link
+          href="/about"
+        >
+          <span className={styles.about}>
+            A propos
+          </span>
+        </Link>
     </footer>
   );
 }
