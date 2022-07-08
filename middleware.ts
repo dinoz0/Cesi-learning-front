@@ -12,7 +12,7 @@ export function middleware(req: NextRequest) {
   ) {
     if (!pathname.startsWith("/login") && !pathname.startsWith("/api/auth")) {
       const token = req.cookies.get("token");
-      if (!token || token !== "testvalue") {
+      if (!token) {
         console.log("redirected  !");
         return NextResponse.redirect(new URL("/login", req.url));
       }
