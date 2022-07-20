@@ -1,11 +1,12 @@
 import { NextPage } from "next";
 import { GetServerSideProps } from 'next'
 import Link from "next/link";
+import styles from '../../styles/adminUser.module.css'
 
 const AdminIndex: NextPage<{user: any}> = ({user}: {user: any}) => {
     return <div>
         <h1>Dashboard</h1>
-        <Link href={"/admin/user"}><h2>{user.length} utilisateurs en base de données.</h2></Link>
+        <Link href={"/admin/user"}><h2 className={styles.link}>{user.length} utilisateurs en base de données.</h2></Link>
     </div>
 }
 

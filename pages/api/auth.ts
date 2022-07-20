@@ -20,7 +20,6 @@ export default async function handler(
       headers,
     });
     const json = await result.json();
-    console.log(json);
     if (result.status === 200 && json.token) {
       const cookies = new Cookies(req, res);
       cookies.set("token", json.token);
