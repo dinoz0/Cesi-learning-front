@@ -6,23 +6,17 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { nom, description, contenu, ressouces, propriétaire } = req.body;
-    if (!nom || !description || !contenu || !ressouces || !propriétaire) {
+    const { nom, prenom, email, role, password } = req.body;
+    if (!nom || !prenom || !email || !role || !password) {
       return res.status(400).json({ message: "Formulaire incorrect" });
     }
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     if (!req.cookies.token) return res.status(401).redirect("/login");
     headers.append("authorization", "Bearer " + req.cookies.token);
-    const result = await fetch(process.env.API_URL + `/cours`, {
+    const result = await fetch(process.env.API_URL + `/user`, {
       method: "POST",
-      body: JSON.stringify({
-        nom,
-        description,
-        contenu,
-        ressouces,
-        propriétaire,
-      }),
+      body: JSON.stringify({ nom, prenom, email, role, password }),
       headers,
     });
     const json = await result.json();
