@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { GetServerSideProps } from 'next'
+import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import {Roles} from '../../../utils/roles'
 
@@ -17,9 +18,36 @@ const AdminIndex: NextPage<{user: User}> = ({user}: {user: User}) => {
     const [prenom, setPrenom] = useState(user.prenom);
     const [email, setEmail] = useState(user.email);
     const [role, setRole] = useState(user.role)
+    const [error, setError] = useState("")
+    const router = useRouter()
+    const modify = async () => {
+        const headers = new Headers()
+        headers.append("Content-Type", "application/json");
+        const res = await fetch("/api/user/" + router.query.id, {
+            method: "PATCH",
+            body: JSON.stringify({nom, prenom, email, role}),
+            headers
+        })
+        const data = await res.json()
+        if (data.message === "OK") return router.replace("/admin/user")
+        setError(data.message)
+    }
+    const remove = async () => {
+        const headers = new Headers()
+        headers.append("Content-Type", "application/json");
+        const res = await fetch("/api/user/" + router.query.id, {
+            method: "DELETE",
+            headers
+        })
+        const data = await res.json()
+        if (res.status === 401) return router.replace("/login")
+        if (res.status === 200) return router.replace("/admin/user")
+        setError(data.message)
+    }
     return <div>
         <h1>Dashboard User</h1>
-        <h2>{user.prenom} {user.nom}</h2>
+        <h1>{error ? error : ""}</h1>
+        <h2 style={{fontWeight: "400"}}>{user.prenom} {user.nom}</h2>
         <label htmlFor="nom">Nom </label>
         <input name="Email" value={nom} onChange={(e: ChangeEvent<HTMLInputElement>) => setNom(e.target.value)}/>
         <label htmlFor="prenom">Prénom </label>
@@ -33,8 +61,8 @@ const AdminIndex: NextPage<{user: User}> = ({user}: {user: User}) => {
     <option value={Roles.Teacher}>Mentor</option>
     <option value={Roles.Student}>Etudiant</option>
 </select>
-    <button>Modifier</button>
-    <button>Supprimer</button>
+    <button onClick={modify}>Modifier</button>
+    <button onClick={remove}>Supprimer</button>
     </div>
 }
 

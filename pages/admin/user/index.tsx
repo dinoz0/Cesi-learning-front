@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { GetServerSideProps } from 'next'
 import Link from "next/link";
 import {Roles} from '../../../utils/roles'
+import styles from '../../../styles/adminUser.module.css'
 
 type User = {
 	_id?: string;
@@ -13,10 +14,11 @@ type User = {
 };
 
 const AdminIndex: NextPage<{users: User[]}> = ({users}: {users: User[]}) => {
-    const arrayUser = users.map(user => <Link href={`/admin/user/${user._id}`} key={user._id}><div> <p>{user.prenom} {user.nom} {user.email}</p></div></Link>)
+    const arrayUser = users.map(user => <Link href={`/admin/user/${user._id}`} key={user._id}><div> <p className={styles.link}>{user.prenom} {user.nom} {user.email}</p></div></Link>)
     return <div>
         <h1>Dashboard User</h1>
         {arrayUser}
+        <Link href={"/admin/user/add"}><button>Ajouter un utilisateur</button></Link>
     </div>
 }
 
