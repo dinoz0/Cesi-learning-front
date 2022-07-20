@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import ListeCours from "../components/ListeCours/listeCours";
-
-const Home = () => {
+const Home = ({ cours }: { cours: cours[] }) => {
+  console.log(cours);
   return (
     <div className={styles.container}>
       <Head>
@@ -19,7 +19,15 @@ const Home = () => {
         </h1>
 
         <div className={styles.grid}>
-          <ListeCours
+          {cours.map((cours) => (
+            <ListeCours
+              key={cours._id}
+              id={cours._id}
+              name={cours.nom}
+              description={cours.description}
+            ></ListeCours>
+          ))}
+          {/* <ListeCours
             id="1"
             name="Cours de React"
             description="Cours sur les base de React"
@@ -48,7 +56,7 @@ const Home = () => {
             id="6"
             name="Cours de React"
             description="Cours sur les base de React"
-          />
+          /> */}
         </div>
       </main>
 
@@ -71,6 +79,44 @@ const Home = () => {
       </footer> */}
     </div>
   );
+};
+
+type cours = {
+  _id: string;
+  nom: string;
+  description: string;
+  contenu: string;
+  propriétaire: string;
+};
+type response = {
+  message: string;
+  data: cours[];
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const headers = new Headers();
+  headers.append("authorization", "Bearer " + context.req.cookies.token);
+  const resUser = await fetch(`${process.env.API_URL}/user`, {
+    method: "GET",
+    headers,
+  });
+  if (resUser.status === 401) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+      props: {},
+    };
+  }
+  const res = await fetch(`${process.env.API_URL}/cours`, { headers });
+  const data: response = await res.json();
+  console.log(data);
+  //const { cours } = data;
+
+  return {
+    props: { cours: data.data },
+  };
 };
 
 export default Home;
