@@ -9,7 +9,7 @@ type Cours = {
   nom: string;
   description: string;
   contenu: string;
-  ressouces: string[];
+  ressouces: string;
   propriétaire: string;
 };
 
@@ -22,7 +22,6 @@ const AdminIndex: NextPage<{ cours: Cours }> = ({
   const [description, setDescription] = useState(cours.description);
   const [contenu, setContenu] = useState(cours.contenu);
   const [ressouces, setRessouces] = useState(cours.ressouces);
-  const [propriétaire, setPropriétaire] = useState(cours.ressouces);
   const [error, setError] = useState("");
   const router = useRouter();
   const modify = async () => {
@@ -35,7 +34,6 @@ const AdminIndex: NextPage<{ cours: Cours }> = ({
         description,
         contenu,
         ressouces,
-        propriétaire,
       }),
       headers,
     });
@@ -51,7 +49,6 @@ const AdminIndex: NextPage<{ cours: Cours }> = ({
       headers,
     });
     const data = await res.json();
-    console.log(res);
     if (res.status === 401) return router.replace("/login");
     if (res.status === 200) return router.replace("/prof/cours");
     setError(data.message);
@@ -63,7 +60,7 @@ const AdminIndex: NextPage<{ cours: Cours }> = ({
       <h2 style={{ fontWeight: "400" }}>{cours.nom}</h2>
       <label htmlFor="nom">Nom </label>
       <input
-        name="Contenu"
+        name="Nom"
         value={nom}
         onChange={(e: ChangeEvent<HTMLInputElement>) => setNom(e.target.value)}
       />
@@ -81,6 +78,14 @@ const AdminIndex: NextPage<{ cours: Cours }> = ({
         value={contenu}
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
           setContenu(e.target.value)
+        }
+      />
+      <label htmlFor="Ressouce">Ressource </label>
+      <textarea
+        name="Ressouce"
+        value={ressouces}
+        onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+          setRessouces(e.target.value)
         }
       />
 
