@@ -18,7 +18,6 @@ const AdminIndex: NextPage = () => {
   const [description, setDescription] = useState("");
   const [contenu, setContenu] = useState("");
   const [ressouces, setRessouces] = useState("");
-  const [propriétaire, setPropriétaire] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
   const add = async () => {
@@ -31,13 +30,12 @@ const AdminIndex: NextPage = () => {
         description,
         contenu,
         ressouces,
-        propriétaire,
       }),
       headers,
     });
     const data = await res.json();
     if (res.status === 401) return router.push("/login");
-    if (res.status === 201) return router.push("/admin/user");
+    if (res.status === 201) return router.push("/prof/cours");
     setError(data.message);
   };
   return (
@@ -73,15 +71,6 @@ const AdminIndex: NextPage = () => {
         value={ressouces}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           setRessouces(e.target.value)
-        }
-      />
-
-      <label htmlFor="propriétaire">Propriétaire </label>
-      <input
-        name="propriétaire"
-        value={propriétaire}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setPropriétaire(e.target.value)
         }
       />
       <button onClick={add}>Ajouter</button>
