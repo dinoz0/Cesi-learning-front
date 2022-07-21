@@ -13,7 +13,7 @@ export default async function handler(
     headers.append("Content-Type", "application/json");
     if (!req.cookies.token) return res.status(401).redirect("/login");
     headers.append("authorization", "Bearer " + req.cookies.token);
-    const result = await fetch(process.env.API_URL + `/user/${req.query.id}`, {
+    const result = await fetch(process.env.API_URL + `/cours/${req.query.id}`, {
       method: "PATCH",
       body: JSON.stringify({ nom, description, contenu, ressouces }),
       headers,
@@ -26,7 +26,7 @@ export default async function handler(
     headers.append("Content-Type", "application/json");
     if (!req.cookies.token) return res.status(401).redirect("/login");
     headers.append("authorization", "Bearer " + req.cookies.token);
-    const result = await fetch(process.env.API_URL + `/user/${req.query.id}`, {
+    const result = await fetch(process.env.API_URL + `/cours/${req.query.id}`, {
       method: "DELETE",
       headers,
     });
@@ -41,7 +41,7 @@ export default async function handler(
     headers.append("Content-Type", "application/json");
     if (!req.cookies.token) return res.status(401).redirect("/login");
     headers.append("authorization", "Bearer " + req.cookies.token);
-    const result = await fetch(process.env.API_URL + `/user/${req.query.id}`, {
+    const result = await fetch(process.env.API_URL + `/cours/${req.query.id}`, {
       method: "POST",
       body: JSON.stringify({ nom, description, contenu, ressouces }),
       headers,

@@ -51,8 +51,9 @@ const AdminIndex: NextPage<{ cours: Cours }> = ({
       headers,
     });
     const data = await res.json();
+    console.log(res);
     if (res.status === 401) return router.replace("/login");
-    if (res.status === 200) return router.replace("/admin/cours");
+    if (res.status === 200) return router.replace("/prof");
     setError(data.message);
   };
   return (
