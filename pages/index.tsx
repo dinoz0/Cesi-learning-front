@@ -62,8 +62,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   const res = await fetch(`${process.env.API_URL}/cours`, { headers });
   const data: response = await res.json();
-  console.log(data);
-  //const { cours } = data;
 
   return {
     props: { cours: data.data },
