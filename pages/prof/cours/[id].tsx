@@ -40,7 +40,7 @@ const AdminIndex: NextPage<{ cours: Cours }> = ({
       headers,
     });
     const data = await res.json();
-    if (data.message === "OK") return router.replace("/admin/cours");
+    if (data.message === "OK") return router.replace("/prof/cours");
     setError(data.message);
   };
   const remove = async () => {
@@ -53,7 +53,7 @@ const AdminIndex: NextPage<{ cours: Cours }> = ({
     const data = await res.json();
     console.log(res);
     if (res.status === 401) return router.replace("/login");
-    if (res.status === 200) return router.replace("/prof");
+    if (res.status === 200) return router.replace("/prof/cours");
     setError(data.message);
   };
   return (
