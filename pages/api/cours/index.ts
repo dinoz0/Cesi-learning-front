@@ -6,8 +6,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { nom, description, contenu, ressouces, propriétaire } = req.body;
-    if (!nom || !description || !contenu || !ressouces || !propriétaire) {
+    const { nom, description, contenu, ressouces } = req.body;
+    if (!nom || !description || !contenu || !ressouces) {
       return res.status(400).json({ message: "Formulaire incorrect" });
     }
     const headers = new Headers();
@@ -21,7 +21,6 @@ export default async function handler(
         description,
         contenu,
         ressouces,
-        propriétaire,
       }),
       headers,
     });

@@ -3,13 +3,13 @@ import { GetServerSideProps } from "next";
 import Link from "next/link";
 import styles from "../../styles/adminUser.module.css";
 
-const AdminIndex: NextPage<{ user: any }> = ({ user }: { user: any }) => {
+const AdminIndex: NextPage<{ cours: any }> = ({ cours }: { cours: any }) => {
   return (
     <div>
       <h1>Dashboard</h1>
-      <Link href={"/admin/user"}>
+      <Link href={"/prof/cours"}>
         <h2 className={styles.link}>
-          {user.length} utilisateurs en base de données.
+          {cours.length} cours en base de données.
         </h2>
       </Link>
     </div>
@@ -19,7 +19,7 @@ const AdminIndex: NextPage<{ user: any }> = ({ user }: { user: any }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const headers = new Headers();
   headers.append("authorization", "Bearer " + context.req.cookies.token);
-  const resUser = await fetch(`${process.env.API_URL}/user`, {
+  const resUser = await fetch(`${process.env.API_URL}/cours`, {
     method: "GET",
     headers,
   });
@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   const dataUser = await resUser.json();
   return {
-    props: { user: dataUser.data },
+    props: { cours: dataUser.data },
   };
 };
 export default AdminIndex;

@@ -32,8 +32,9 @@
 
 .title {
   font-size: 3rem;
-  margin: auto;
-  margin-top: initial;
+  /* margin: auto;
+  margin-top: initial; */
+  margin-top: -20%;
 }
 
 .title,
@@ -101,6 +102,20 @@
   height: 1em;
   margin-left: 0.5rem;
   cursor: "pointer";
+}
+
+.divButton {
+  width: 100%;
+}
+
+.button{
+  float : right;
+  border: 1px solid  black;
+  border-radius: 10px;
+  background-color: #757474;
+  width: 100px;
+  height: 50px;
+  font-weight: bold
 }
 
 @media (max-width: 600px) {
